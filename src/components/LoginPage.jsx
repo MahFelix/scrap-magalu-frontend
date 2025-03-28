@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FiLogIn, FiUserPlus, FiLock, FiMail, FiUser } from 'react-icons/fi';
 
 
-// Container principal
+
 const LoginContainer = styled.div`
   font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   background-color: #98c8f8;
@@ -16,7 +16,7 @@ const LoginContainer = styled.div`
   padding: 2rem;
 `;
 
-// Card principal
+
 const AuthCard = styled.div`
   background: white;
   border-radius: 12px;
@@ -28,7 +28,6 @@ const AuthCard = styled.div`
   position: relative;
 `;
 
-// Painel (login ou registro)
 const AuthPanel = styled.div`
   width: 50%;
   padding: 6rem;
@@ -39,7 +38,7 @@ const AuthPanel = styled.div`
   z-index: 1;
 `;
 
-// Overlay dinâmico
+
 const SlidingOverlay = styled.div`
   position: absolute;
   top: 0;
@@ -70,7 +69,7 @@ const SlidingOverlay = styled.div`
   }
 `;
 
-// Botão de alternar
+
 const ToggleButton = styled.button`
   padding: 0.75rem 1.5rem;
   background-color: transparent;
@@ -88,7 +87,7 @@ const ToggleButton = styled.button`
   }
 `;
 
-// Título do painel
+
 const PanelTitle = styled.h2`
   font-size: 1.75rem;
   color: #2c3e50;
@@ -108,13 +107,13 @@ const PanelTitle = styled.h2`
   }
 `;
 
-// Grupo de formulário
+
 const FormGroup = styled.div`
   margin-bottom: 1.5rem;
   position: relative;
 `;
 
-// Label do input
+
 const InputLabel = styled.label`
   display: block;
   margin-bottom: 0.5rem;
@@ -123,7 +122,7 @@ const InputLabel = styled.label`
   color: #34495e;
 `;
 
-// Input field
+
 const InputField = styled.div`
   position: relative;
   display: flex;
@@ -136,7 +135,7 @@ const InputField = styled.div`
   }
 `;
 
-// Input
+
 const Input = styled.input`
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 40px;
@@ -152,7 +151,7 @@ const Input = styled.input`
   }
 `;
 
-// Botão de submit
+
 const SubmitButton = styled.button`
   width: 100%;
   padding: 0.75rem;
@@ -181,7 +180,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-// Link alternar
+
 const ToggleLink = styled.p`
   text-align: center;
   margin-top: 1.5rem;
@@ -206,7 +205,7 @@ function LoginPage({ setIsAuthenticated }) {
   const [loginError, setLoginError] = useState('');
   const [registerError, setRegisterError] = useState('');
 
-  // Form states
+
   const [loginForm, setLoginForm] = useState({
     email: '',
     password: ''
@@ -219,7 +218,7 @@ function LoginPage({ setIsAuthenticated }) {
     confirmPassword: ''
   });
 
-  // Verificar autenticação ao carregar
+ 
   useEffect(() => {
     const auth = localStorage.getItem('isAuthenticated');
     if (auth) {
@@ -259,18 +258,18 @@ function LoginPage({ setIsAuthenticated }) {
       { email: "usuario@teste.com", password: "senha123" }
     ];
   
-    // Verifica se é uma credencial válida
+
     const isValid = testCredentials.some(
       cred => cred.email === loginForm.email && cred.password === loginForm.password
     );
   
     if (isValid) {
-      setIsAuthenticated(true); // Isso vai acionar o useEffect no App.js
+      setIsAuthenticated(true);
       navigate('/products');
       return;
     }
   
-    // Validação básica
+
     if (!loginForm.email || !loginForm.password) {
       setLoginError('Por favor, preencha todos os campos');
       return;
@@ -282,7 +281,7 @@ function LoginPage({ setIsAuthenticated }) {
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     
-    // Validações
+
     if (!registerForm.name || !registerForm.email || !registerForm.password || !registerForm.confirmPassword) {
       setRegisterError('Por favor, preencha todos os campos');
       return;
@@ -303,7 +302,7 @@ function LoginPage({ setIsAuthenticated }) {
       return;
     }
 
-    // Simulação de registro
+  
     setIsAuthenticated(true);
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userEmail', registerForm.email);
@@ -319,7 +318,7 @@ function LoginPage({ setIsAuthenticated }) {
   return (
     <LoginContainer>
       <AuthCard>
-        {/* Painel de Login */}
+        
         <AuthPanel>
           <PanelTitle>
             <FiLogIn size={24} />
@@ -370,7 +369,7 @@ function LoginPage({ setIsAuthenticated }) {
           </ToggleLink>
         </AuthPanel>
         
-        {/* Painel de Registro */}
+       
         <AuthPanel>
           <PanelTitle>
             <FiUserPlus size={24} />
@@ -451,7 +450,7 @@ function LoginPage({ setIsAuthenticated }) {
           </ToggleLink>
         </AuthPanel>
         
-        {/* Overlay dinâmico */}
+    
         <SlidingOverlay $activePanel={activePanel}>
           {activePanel === 'login' ? (
             <>

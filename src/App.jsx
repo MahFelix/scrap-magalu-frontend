@@ -5,11 +5,11 @@ import ProductsPage from './components/ProductsPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    // Verifica a autenticação no localStorage ao inicializar
+   
     return localStorage.getItem('isAuthenticated') === 'true';
   });
 
-  // Atualiza o localStorage quando isAuthenticated muda
+
   useEffect(() => {
     if (isAuthenticated) {
       localStorage.setItem('isAuthenticated', 'true');

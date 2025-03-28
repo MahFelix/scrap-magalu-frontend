@@ -5,13 +5,13 @@ import axios from 'axios';
 import styled, { keyframes, css } from 'styled-components';
 import { FiRefreshCw, FiExternalLink, FiAlertCircle, FiLogOut } from 'react-icons/fi';
 
-// Animação de loading
+
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 `;
 
-// Container principal
+
 const AppContainer = styled.div`
   font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   background-color: #98c8f8;
@@ -19,7 +19,7 @@ const AppContainer = styled.div`
   padding: 2rem;
 `;
 
-// Header estilizado
+
 const Header = styled.header`
   max-width: 1200px;
   margin: 0 auto 2rem;
@@ -49,7 +49,7 @@ const Title = styled.h1`
   }
 `;
 
-// Botão de refresh
+
 const RefreshButton = styled.button`
   display: flex;
   align-items: center;
@@ -80,7 +80,7 @@ const RefreshButton = styled.button`
   }
 `;
 
-// Botão de logout
+
 const LogoutButton = styled.button`
   display: flex;
   align-items: center;
@@ -101,13 +101,13 @@ const LogoutButton = styled.button`
   }
 `;
 
-// Container para botões
+
 const ButtonGroup = styled.div`
   display: flex;
   gap: 1rem;
 `;
 
-// Grid de produtos
+
 const ProductGrid = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -116,7 +116,7 @@ const ProductGrid = styled.div`
   gap: 1.5rem;
 `;
 
-// Card de produto
+
 const ProductCard = styled.article`
   background: white;
   border-radius: 12px;
@@ -177,7 +177,7 @@ const ProductLink = styled.a`
   }
 `;
 
-// Estados de loading e erro
+
 const LoadingState = styled.div`
   max-width: 1200px;
   margin: 2rem auto;
