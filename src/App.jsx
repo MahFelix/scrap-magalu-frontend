@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './components/LoginPage';
-import ProductsPage from './components/ProductsPage';
+import LoginPage from './components/Login/LoginPage';
+import ProductsPage from './components/Products/ProductsPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
