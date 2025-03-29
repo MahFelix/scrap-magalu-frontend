@@ -85,20 +85,19 @@ function LoginPage({ setIsAuthenticated }) {
       setIsLoading(false);
       return;
     }
-
+  
     if (!validateEmail(loginForm.email)) {
       setLoginError('Por favor, insira um email válido');
       setIsLoading(false);
       return;
     }
-
+  
     try {
       const response = await api.post('/login', {
         email: loginForm.email,
         password: loginForm.password
       });
-
-      // Mostra a notificação primeiro
+  
       toast.success('Logado com sucesso!', {
         position: "top-right",
         autoClose: 2000,
@@ -106,66 +105,54 @@ function LoginPage({ setIsAuthenticated }) {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
       });
-
-      // Espera a notificação ser exibida antes de redirecionar
+  
+      // Resetar o estado de loading antes de redirecionar
+      setIsLoading(false);
+      
       setTimeout(() => {
         setIsAuthenticated(true);
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('userEmail', loginForm.email);
         navigate('/products');
       }, 2000);
-
+  
     } catch (error) {
       setIsLoading(false);
-      let errorMessage = 'Erro ao conectar com o servidor';
-      
-      if (error.response) {
-        errorMessage = error.response.data || 'Credenciais inválidas';
-        setLoginError(errorMessage);
-      }
-
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      const errorMessage = error.response?.data || 'Credenciais inválidas';
+      setLoginError(errorMessage);
+      toast.error(errorMessage);
     }
   };
   
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     if (!registerForm.name || !registerForm.email || !registerForm.password || !registerForm.confirmPassword) {
       setRegisterError('Por favor, preencha todos os campos');
       setIsLoading(false);
       return;
     }
-
+  
     if (!validateEmail(registerForm.email)) {
       setRegisterError('Por favor, insira um email válido');
       setIsLoading(false);
       return;
     }
-
+  
     if (registerForm.password !== registerForm.confirmPassword) {
       setRegisterError('As senhas não coincidem');
       setIsLoading(false);
       return;
     }
-
+  
     if (registerForm.password.length < 6) {
       setRegisterError('A senha deve ter pelo menos 6 caracteres');
       setIsLoading(false);
       return;
     }
-
+  
     try {
       const response = await api.post('/register', {
         name: registerForm.name,
@@ -173,8 +160,7 @@ function LoginPage({ setIsAuthenticated }) {
         password: registerForm.password,
         confirmPassword: registerForm.confirmPassword
       });
-
-      // Mostra a notificação primeiro
+  
       toast.success('Cadastro concluído com sucesso!', {
         position: "top-right",
         autoClose: 2000,
@@ -182,37 +168,25 @@ function LoginPage({ setIsAuthenticated }) {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
       });
-
+  
+      // Resetar o estado de loading
+      setIsLoading(false);
+      
       // Muda para o painel de login após o cadastro
-      setTimeout(() => {
-        setRegisterForm({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: ''
-        });
-      }, 2000);
-
+      setActivePanel('login');
+      setRegisterForm({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+  
     } catch (error) {
       setIsLoading(false);
-      let errorMessage = 'Erro ao conectar com o servidor';
-      
-      if (error.response) {
-        errorMessage = error.response.data || 'Erro ao registrar usuário';
-        setRegisterError(errorMessage);
-      }
-
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      const errorMessage = error.response?.data || 'Erro ao registrar usuário';
+      setRegisterError(errorMessage);
+      toast.error(errorMessage);
     }
   };
   
